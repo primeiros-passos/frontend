@@ -13,7 +13,6 @@
         <Input
           placeholder="Qual comunidade você está procurando?"
           :action-icon="require('@/assets/img/search.png')"
-          :action="teste"
         />
       </div>
     </div>
