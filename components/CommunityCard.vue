@@ -1,5 +1,5 @@
 <template>
-  <div class="card" :style="{ backgroundColor: color }">
+  <NuxtLink :to="route" class="card" :style="{ backgroundColor: color }">
     <p class="title">{{ title }}</p>
     <p class="desc">{{ desc }}</p>
     <div class="content-count">
@@ -8,7 +8,7 @@
         {{ contentCount }} {{ contentCount === 1 ? 'conteúdo' : 'conteúdos' }}
       </p>
     </div>
-  </div>
+  </NuxtLink>
 </template>
 
 <script>
@@ -31,18 +31,30 @@ export default {
       type: Number,
       required: true,
     },
+    route: {
+      type: String,
+      required: true,
+    },
   },
 }
 </script>
 
 <style lang="scss" scoped>
 .card {
+  border: 3px solid transparent;
   background-color: #d7eee3;
   width: 23.125rem;
   border-radius: 0.75rem;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   padding: 1rem 1.5rem;
   margin-bottom: 2.5rem;
+  text-decoration: none;
+  transition-property: border;
+  transition-duration: 0.2s;
+
+  &:hover {
+    border: 3px solid $secondary;
+  }
 
   p {
     white-space: normal;

@@ -9,6 +9,7 @@
         :desc="community.desc"
         :color="community.color"
         :content-count="community.contentCount"
+        :route="community.route"
       />
     </div>
   </div>
@@ -25,36 +26,42 @@ export default {
           desc: 'Aprenda as tecnologias e fundamentos para se tornar um desenvolvedor frontend Aprenda as tecnologias e fundamentos para se tornar um frontend.',
           color: '#D7EEE3',
           contentCount: 123,
+          route: '/',
         },
         {
           title: 'React',
           desc: 'Aprenda as tecnologias e fundamentos para se tornar um desenvolvedor frontend Aprenda as tecnologias e fundamentos para se tornar um frontend.',
           color: '#C4F7F3',
           contentCount: 123,
+          route: '/',
         },
         {
           title: 'UX Design',
           desc: 'Aprenda as tecnologias e fundamentos para se tornar um desenvolvedor frontend Aprenda as tecnologias e fundamentos para se tornar um frontend.',
           color: '#B37BFB',
           contentCount: 123,
+          route: '/',
         },
         {
           title: 'Banco de Dados',
           desc: 'Aprenda as tecnologias e fundamentos para se tornar um desenvolvedor frontend Aprenda as tecnologias e fundamentos para se tornar um frontend.',
           color: '#FFF383',
           contentCount: 123,
+          route: '/',
         },
         {
           title: 'C#',
           desc: 'Aprenda as tecnologias e fundamentos para se tornar um desenvolvedor frontend Aprenda as tecnologias e fundamentos para se tornar um frontend.',
           color: '#FFAA98',
           contentCount: 123,
+          route: '/',
         },
         {
           title: 'Python',
           desc: 'Aprenda as tecnologias e fundamentos para se tornar um desenvolvedor frontend Aprenda as tecnologias e fundamentos para se tornar um frontend.',
           color: '#A1AAEE',
           contentCount: 123,
+          route: '/',
         },
       ],
     }
