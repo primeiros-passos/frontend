@@ -61,7 +61,7 @@ export default {
 
 <style lang="scss">
 nav {
-  background-color: $primary;
+  background-color: $primary-dark;
   padding: 1.5rem 0;
 
   p,
@@ -70,7 +70,6 @@ nav {
   }
 
   .content {
-    margin: 0 auto;
     padding: 0 1rem;
   }
 
