@@ -1,6 +1,7 @@
 <template>
   <div>
     <HomePageBanner />
+    <HomePageCommunities />
   </div>
 </template>
 
