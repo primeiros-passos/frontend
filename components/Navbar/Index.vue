@@ -16,7 +16,14 @@
 
     <div v-else class="content d-flex flex-column justify-center align-end">
       <Button icon :on-click="toggleMenu">
-        <img src="@/assets/img/menu.png" alt="Menu" />
+        <img
+          :src="
+            !menu
+              ? require('@/assets/img/menu.png')
+              : require('@/assets/img/up-arrow.png')
+          "
+          alt="Menu"
+        />
       </Button>
       <Transition name="slide-fade">
         <div v-if="menu" class="d-flex flex-column align-end">
