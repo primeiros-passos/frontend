@@ -10,7 +10,7 @@
       </div>
       <div class="d-flex justify-center align-center">
         <NuxtLink to="/login">Fazer Login</NuxtLink>
-        <Button secondary :on-click="() => {}">Cadastrar</Button>
+        <Button secondary :on-click="() => $router.push('/signup')">Cadastrar</Button>
       </div>
     </div>
 
@@ -30,7 +30,7 @@
           <NuxtLink to="/" class="mobile">Início</NuxtLink>
           <NuxtLink to="/communities" class="mobile">Comunidades</NuxtLink>
           <NuxtLink to="/login" class="mobile">Fazer Login</NuxtLink>
-          <Button secondary :on-click="() => {}">Cadastrar</Button>
+          <Button secondary :on-click="() => $router.push('/signup')">Cadastrar</Button>
         </div>
       </Transition>
     </div>
