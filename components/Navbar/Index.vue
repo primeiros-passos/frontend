@@ -79,6 +79,7 @@ nav {
     text-decoration: none;
     transition-property: background-color;
     transition-duration: 0.2s;
+    outline-color: $secondary;
 
     &:hover {
       background-color: $primary-dark;

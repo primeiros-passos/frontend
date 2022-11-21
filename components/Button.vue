@@ -61,6 +61,7 @@ button {
   &.primary {
     color: $white;
     background-color: $primary;
+    outline-color: $secondary;
 
     &:hover {
       background-color: $primary-dark;
@@ -70,6 +71,7 @@ button {
   &.secondary {
     color: $white;
     background-color: $secondary;
+    outline-color: $primary;
 
     &:hover {
       background-color: $secondary-dark;
@@ -79,6 +81,7 @@ button {
   &.white {
     color: $black;
     background-color: $white;
+    outline-color: $primary;
 
     &:hover {
       background-color: $tertiary-hyper-light;
