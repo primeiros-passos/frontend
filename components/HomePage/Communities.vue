@@ -71,8 +71,6 @@ export default {
 
 <style lang="scss" scoped>
 .content {
-  padding: 0.625rem 1.25rem;
-
   h1 {
     margin-bottom: 2.5rem;
   }
