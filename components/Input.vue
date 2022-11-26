@@ -46,7 +46,8 @@ export default {
     font-size: 1rem;
     font-family: 'Poppins', sans-serif;
     border-radius: 7.5rem;
-    border: none;
+    border: 1px solid $tertiary-light;
+    background-color: $white;
     width: 100%;
     outline-color: $secondary;
   }
@@ -59,7 +60,7 @@ export default {
     position: absolute;
     width: 2rem;
     height: 2rem;
-    margin: 0.4rem 0 0.4rem -3.5rem;
+    margin: 0.5rem 0 0.5rem -3.5rem;
     padding: 0;
     border: none;
     background: none;

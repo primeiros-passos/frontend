@@ -64,6 +64,7 @@ export default {
   }
 
   .popover-content {
+    margin-top: 0.2rem;
     background-color: $white;
     position: absolute;
     border-radius: 0.5rem;
@@ -74,10 +75,10 @@ export default {
 }
 
 .bounce-enter-active {
-  animation: bounce-in 0.5s;
+  animation: bounce-in 0.3s;
 }
 .bounce-leave-active {
-  animation: bounce-in 0.5s reverse;
+  animation: bounce-in 0.3s reverse;
 }
 @keyframes bounce-in {
   0% {

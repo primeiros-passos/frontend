@@ -81,3 +81,13 @@ h5 {
 .justify-end {
   justify-content: flex-end;
 }
+
+/* ROUTE TRANSITION */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.2s;
+}
+.page-enter,
+.page-leave-to {
+  opacity: 0;
+}
