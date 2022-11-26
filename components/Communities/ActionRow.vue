@@ -1,5 +1,5 @@
 <template>
-  <div class="action-row">
+  <div class="action-row d-flex flex-wrap align-center justify-between">
     <div class="filters">
       <Input
         placeholder="Qual comunidade você está procurando?"
@@ -27,6 +27,8 @@
         </div>
       </Popover>
     </div>
+
+    <Button secondary :on-click="() => {}">Solicitar comunidade</Button>
   </div>
 </template>
 
@@ -62,6 +64,29 @@ export default {
     .categories-filter {
       width: 300px;
       margin-top: 1rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 645px) {
+  .action-row {
+    .filters {
+      width: 100%;
+      margin-bottom: 1rem;
+
+      ::v-deep .popover-content {
+        right: 0;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 390px) {
+  .action-row {
+    .filters {
+      .categories-filter {
+        width: 200px;
+      }
     }
   }
 }
