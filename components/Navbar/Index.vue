@@ -8,10 +8,10 @@
         <NuxtLink to="/">Início</NuxtLink>
         <NuxtLink to="/communities">Comunidades</NuxtLink>
       </div>
-      <div class="d-flex justify-center align-center">
+      <!-- <div class="d-flex justify-center align-center">
         <NuxtLink to="/login">Fazer Login</NuxtLink>
         <Button secondary :on-click="() => $router.push('/signup')">Cadastrar</Button>
-      </div>
+      </div> -->
     </div>
 
     <div v-else class="content d-flex flex-column justify-center align-end">
@@ -29,8 +29,8 @@
         <div v-if="menu" class="d-flex flex-column align-end">
           <NuxtLink to="/" class="mobile">Início</NuxtLink>
           <NuxtLink to="/communities" class="mobile">Comunidades</NuxtLink>
-          <NuxtLink to="/login" class="mobile">Fazer Login</NuxtLink>
-          <Button secondary :on-click="() => $router.push('/signup')">Cadastrar</Button>
+          <!-- <NuxtLink to="/login" class="mobile">Fazer Login</NuxtLink>
+          <Button secondary :on-click="() => $router.push('/signup')">Cadastrar</Button> -->
         </div>
       </Transition>
     </div>

@@ -28,7 +28,7 @@
       </Popover>
     </div>
 
-    <Button secondary :on-click="() => {}">Solicitar comunidade</Button>
+    <!-- <Button secondary :on-click="() => {}">Solicitar comunidade</Button> -->
   </div>
 </template>
 
