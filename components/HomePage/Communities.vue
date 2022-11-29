@@ -1,17 +1,20 @@
 <template>
-  <div class="content">
+  <div v-if="communities.length > 0" class="content">
     <h1>Principais comunidades</h1>
     <div class="d-flex flex-wrap align-stretch justify-between">
       <CommunityCard
         v-for="community in communities"
-        :key="community.title"
-        :title="community.title"
-        :desc="community.desc"
-        :color="community.color"
-        :content-count="community.contentCount"
-        :route="community.route"
+        :key="community.id"
+        :title="community.name"
+        :desc="community.description"
+        :color="community.category.color"
+        :content-count="community._count.content"
+        :route="$router.resolve(`community/${community.id}`).href"
       />
     </div>
+  </div>
+  <div v-else class="content no-content">
+    <h1>Nenhuma plataforma a mostar...</h1>
   </div>
 </template>
 
@@ -20,51 +23,18 @@ export default {
   name: 'HomePageCommunities',
   data() {
     return {
-      communities: [
-        {
-          title: 'Javascript',
-          desc: 'Aprenda as tecnologias e fundamentos para se tornar um desenvolvedor frontend Aprenda as tecnologias e fundamentos para se tornar um frontend.',
-          color: '#D7EEE3',
-          contentCount: 123,
-          route: 'community',
-        },
-        {
-          title: 'React',
-          desc: 'Aprenda as tecnologias e fundamentos para se tornar um desenvolvedor frontend Aprenda as tecnologias e fundamentos para se tornar um frontend.',
-          color: '#C4F7F3',
-          contentCount: 123,
-          route: 'community',
-        },
-        {
-          title: 'UX Design',
-          desc: 'Aprenda as tecnologias e fundamentos para se tornar um desenvolvedor frontend Aprenda as tecnologias e fundamentos para se tornar um frontend.',
-          color: '#B37BFB',
-          contentCount: 123,
-          route: 'community',
-        },
-        {
-          title: 'Banco de Dados',
-          desc: 'Aprenda as tecnologias e fundamentos para se tornar um desenvolvedor frontend Aprenda as tecnologias e fundamentos para se tornar um frontend.',
-          color: '#FFF383',
-          contentCount: 123,
-          route: 'community',
-        },
-        {
-          title: 'C#',
-          desc: 'Aprenda as tecnologias e fundamentos para se tornar um desenvolvedor frontend Aprenda as tecnologias e fundamentos para se tornar um frontend.',
-          color: '#FFAA98',
-          contentCount: 123,
-          route: 'community',
-        },
-        {
-          title: 'Python',
-          desc: 'Aprenda as tecnologias e fundamentos para se tornar um desenvolvedor frontend Aprenda as tecnologias e fundamentos para se tornar um frontend.',
-          color: '#A1AAEE',
-          contentCount: 123,
-          route: 'community',
-        },
-      ],
+      communities: [],
     }
+  },
+  created() {
+    this.getCommunities()
+  },
+  methods: {
+    getCommunities() {
+      this.$axios.get('/communities').then((res) => {
+        this.communities = res.data
+      })
+    },
   },
 }
 </script>
@@ -73,6 +43,13 @@ export default {
 .content {
   h1 {
     margin-bottom: 2.5rem;
+  }
+
+  &.no-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 0.625rem;
   }
 }
 </style>

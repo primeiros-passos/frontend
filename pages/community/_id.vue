@@ -1,11 +1,11 @@
 <template>
   <div class="content">
-    <Button icon :on-click="() => $router.push('/')">
+    <Button icon :on-click="() => $router.go(-1)">
       <img src="@/assets/img/left-arrow.png" alt="Voltar" />
     </Button>
     <div class="title">
       <p>Comunidade</p>
-      <h1>Javascript</h1>
+      <h1>{{ community.name }}</h1>
     </div>
     <div class="main">
       <div class="lists">
@@ -39,32 +39,22 @@
           :contents="content.advanced"
         />
       </div>
-      <div class="related">
+      <div v-if="relatedCommunities.length > 0" class="related">
         <p>Comunidades relacionadas</p>
         <a
-          v-for="community in relatedCommunities"
-          :key="community.id"
-          :href="community.link"
-          :style="{ backgroundColor: community.color }"
+          v-for="relatedCommunity in relatedCommunities"
+          :key="relatedCommunity.id"
+          :href="$router.resolve(`/community/${relatedCommunity.id}`).href"
+          :style="{ backgroundColor: relatedCommunity.category.color }"
         >
-          {{ community.name }}
+          {{ relatedCommunity.name }}
         </a>
       </div>
     </div>
     <div class="w-100">
       <div class="about">
-        <p class="header">Sobre Javascript</p>
-        <p>
-          JavaScript é uma linguagem de programação que permite a você
-          implementar itens complexos em páginas web — toda vez que uma página
-          da web faz mais do que simplesmente mostrar a você informação estática
-          — mostrando conteúdo que se atualiza em um intervalo de tempo, mapas
-          interativos ou gráficos 2D/3D animados, etc. — você pode apostar que o
-          JavaScript provavelmente está envolvido. É a terceira camada do bolo
-          das tecnologias padrões da web, duas das quais (HTML e CSS) nós
-          falamos com muito mais detalhes em outras partes da Área de
-          Aprendizado.
-        </p>
+        <p class="header">Sobre {{ community.name }}</p>
+        <p>{{ community.description }}</p>
       </div>
     </div>
   </div>
@@ -75,122 +65,41 @@ export default {
   name: 'CommunityPage',
   data() {
     return {
+      community: {},
       content: {
-        starter: [
-          {
-            id: '1',
-            description: 'Conteúdo 1',
-            link: 'https://linkdoconteudo.com',
-            value: 0,
-            type: 'video',
-          },
-          {
-            id: '2',
-            description: 'Conteúdo 2',
-            link: 'https://linkdoconteudo.com',
-            value: 0,
-            type: 'archive',
-          },
-          {
-            id: '3',
-            description: 'Conteúdo 3',
-            link: 'https://linkdoconteudo.com',
-            value: 100,
-            type: 'course',
-          },
-        ],
-        medium: [
-          {
-            id: '1',
-            description: 'Conteúdo 1',
-            link: 'https://linkdoconteudo.com',
-            value: 0,
-            type: 'video',
-          },
-          {
-            id: '2',
-            description: 'Conteúdo 2',
-            link: 'https://linkdoconteudo.com',
-            value: 0,
-            type: 'archive',
-          },
-          {
-            id: '3',
-            description: 'Conteúdo 3',
-            link: 'https://linkdoconteudo.com',
-            value: 100,
-            type: 'course',
-          },
-        ],
-        advanced: [
-          {
-            id: '1',
-            description: 'Conteúdo 1',
-            link: 'https://linkdoconteudo.com',
-            value: 0,
-            type: 'video',
-          },
-          {
-            id: '2',
-            description: 'Conteúdo 2',
-            link: 'https://linkdoconteudo.com',
-            value: 0,
-            type: 'archive',
-          },
-          {
-            id: '3',
-            description: 'Conteúdo 3',
-            link: 'https://linkdoconteudo.com',
-            value: 100,
-            type: 'course',
-          },
-        ],
+        starter: [],
+        medium: [],
+        advanced: [],
       },
-      relatedCommunities: [
-        {
-          id: '1',
-          name: 'React Native',
-          color: '#D7EEE3',
-          link: 'https://link.com',
-        },
-        {
-          id: '2',
-          name: 'React',
-          color: '#C4F6F3',
-          link: 'https://link.com',
-        },
-        {
-          id: '3',
-          name: 'Java',
-          color: '#FFAA98',
-          link: 'https://link.com',
-        },
-        {
-          id: '4',
-          name: 'UX Design',
-          color: '#B37BFB',
-          link: 'https://link.com',
-        },
-        {
-          id: '5',
-          name: 'C#',
-          color: '#FEF7BD',
-          link: 'https://link.com',
-        },
-        {
-          id: '6',
-          name: 'C++',
-          color: '#A1AAEE',
-          link: 'https://link.com',
-        },
-        {
-          id: '7',
-          name: 'BD',
-          color: '#FB7B7B',
-          link: 'https://link.com',
-        },
-      ],
+      relatedCommunities: [],
     }
+  },
+  created() {
+    if (!this.$route.params.id) this.$router.push('/')
+    this.getCommunityInformation()
+    this.getCommunityContent()
+    this.getRelatedCommunities()
+  },
+  methods: {
+    getCommunityInformation() {
+      this.$axios.get(`/communities/${this.$route.params.id}`).then((res) => {
+        this.community = res.data
+      })
+    },
+    getCommunityContent() {
+      this.$axios
+        .get(`/communities/${this.$route.params.id}/contents`)
+        .then((res) => {
+          this.content = res.data
+        })
+    },
+    getRelatedCommunities() {
+      this.$axios
+        .get(`/communities/${this.$route.params.id}/related`)
+        .then((res) => {
+          this.relatedCommunities = res.data
+        })
+    },
   },
 }
 </script>

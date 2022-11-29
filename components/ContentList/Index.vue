@@ -5,13 +5,21 @@
     </div>
     <div class="d-flex align-center justify-between">
       <p>{{ description }}</p>
-      <button class="expand-button" :class="{ open }" @click="toggle">
+      <button
+        v-if="contents.length > 0"
+        class="expand-button"
+        :class="{ open }"
+        @click="toggle"
+      >
         <img src="@/assets/img/down-arrow.png" />
       </button>
     </div>
-    <div class="content-counter" :class="{ open }">
+    <div v-if="contents.length > 0" class="content-counter" :class="{ open }">
       <img src="@/assets/img/link.png" />
       <p>99 conteúdos</p>
+    </div>
+    <div v-else class="content-counter" :class="{ open }">
+      <p>Sem conteúdo cadastrado</p>
     </div>
     <div v-if="open" class="list">
       <ContentListItem
