@@ -1,15 +1,15 @@
 <template>
   <div class="item">
-    <div v-if="type === 'video'" class="circle" title="Vídeo">
+    <div v-if="type === 'VIDEO'" class="circle" title="Vídeo">
       <img src="@/assets/img/video.png" />
     </div>
-    <div v-if="type === 'archive'" class="circle" title="Arquivo">
+    <div v-if="type === 'ARCHIVE'" class="circle" title="Arquivo">
       <img src="@/assets/img/archive.png" />
     </div>
-    <div v-if="type === 'course'" class="circle" title="Curso">
+    <div v-if="type === 'COURSE'" class="circle" title="Curso">
       <img src="@/assets/img/course.png" />
     </div>
-    <div v-if="price === 0" class="circle" title="Gratuito">
+    <div v-if="price == 0" class="circle" title="Gratuito">
       <img src="@/assets/img/free.png" />
     </div>
     <div v-else class="circle" :title="formatedPrice">

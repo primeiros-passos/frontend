@@ -16,7 +16,11 @@
     </div>
     <div v-if="contents.length > 0" class="content-counter" :class="{ open }">
       <img src="@/assets/img/link.png" />
-      <p>99 conteúdos</p>
+      <p>
+        {{
+          contents.length != 1 ? `${contents.length} conteúdos` : '1 conteúdo'
+        }}
+      </p>
     </div>
     <div v-else class="content-counter" :class="{ open }">
       <p>Sem conteúdo cadastrado</p>
