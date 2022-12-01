@@ -3,7 +3,11 @@
     <div class="content">
       <div class="community-count d-flex flex-wrap align-center justify-center">
         <p>Mais de</p>
-        <p>&nbsp;405&nbsp;</p>
+        <p>
+          &nbsp;
+          {{ (communityCount < 10) ? `0${communityCount}` : communityCount }}
+          &nbsp;
+        </p>
         <p>Comunidades</p>
       </div>
       <p class="banner-text">
@@ -27,13 +31,22 @@ export default {
   data() {
     return {
       term: '',
+      communityCount: 0,
     }
+  },
+  created() {
+    this.getCommunityCount()
   },
   methods: {
     redirectToCommunities() {
       if (this.term) {
         this.$router.push({ path: '/communities', query: { term: this.term } })
       }
+    },
+    getCommunityCount() {
+      this.$axios.get('communities/count').then((res) => {
+        this.communityCount = res.data
+      })
     },
   },
 }
