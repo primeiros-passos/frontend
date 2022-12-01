@@ -11,8 +11,10 @@
       </p>
       <div class="input-container">
         <Input
+          v-model="term"
           placeholder="Qual comunidade você está procurando?"
           :action-icon="require('@/assets/img/search.png')"
+          :action="redirectToCommunities"
         />
       </div>
     </div>
@@ -22,6 +24,18 @@
 <script>
 export default {
   name: 'HomePageBanner',
+  data() {
+    return {
+      term: '',
+    }
+  },
+  methods: {
+    redirectToCommunities() {
+      if (this.term) {
+        this.$router.push({ path: '/communities', query: { term: this.term } })
+      }
+    },
+  },
 }
 </script>
 

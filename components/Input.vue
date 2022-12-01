@@ -5,6 +5,7 @@
       :class="{ 'right-padding': actionIcon !== null }"
       :type="type"
       :placeholder="placeholder"
+      @keyup.enter="action"
       @input="updateValue($event.target.value)"
     />
     <button v-if="actionIcon !== null" @click.prevent="action">

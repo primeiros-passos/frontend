@@ -33,9 +33,9 @@ export default {
   name: 'CommunitiesActionRow',
   data() {
     return {
-      selectedCategory: '',
+      selectedCategory: this.$route.query.id_category || '',
       categories: [],
-      term: '',
+      term: this.$route.query.term || '',
       typing: null,
     }
   },
