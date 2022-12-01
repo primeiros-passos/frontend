@@ -11,6 +11,7 @@
         :content-count="community._count.content"
         :route="$router.resolve(`community/${community.id}`).href"
       />
+      <div v-if="communities.length % 2 === 0" class="placeholder"></div>
     </div>
   </div>
   <div v-else class="content no-content">
@@ -50,6 +51,26 @@ export default {
     align-items: center;
     justify-content: center;
     padding-top: 5rem;
+  }
+
+  .placeholder {
+    width: 23.125rem;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .content {
+    .placeholder {
+      width: 48%;
+    }
+  }
+}
+
+@media only screen and (max-width: 625px) {
+  .content {
+    .placeholder {
+      width: 100%;
+    }
   }
 }
 </style>
