@@ -14,7 +14,7 @@
     </div>
   </div>
   <div v-else class="content no-content">
-    <h1>Nenhuma plataforma a mostar...</h1>
+    <h1>Nenhuma comunidade a mostar...</h1>
   </div>
 </template>
 
@@ -49,7 +49,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 5rem 0.625rem;
+    padding-top: 5rem;
   }
 }
 </style>

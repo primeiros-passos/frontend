@@ -2,9 +2,13 @@
   <div class="action-row d-flex flex-wrap align-center justify-between">
     <div class="filters">
       <Input
+        v-model="term"
         placeholder="Qual comunidade você está procurando?"
         :action-icon="require('@/assets/img/search.png')"
         class="input"
+        :action="
+          () => searchCommunities({ term, idCategory: selectedCategory })
+        "
       />
 
       <Popover :icon="require('@/assets/img/filter.png')">
@@ -13,16 +17,8 @@
           <Dropdown
             v-model="selectedCategory"
             placeholder="Selecione uma categoria"
-            :options="[
-              {
-                name: 'Categoria 1',
-                value: 1,
-              },
-              {
-                name: 'Categoria 2',
-                value: 2,
-              },
-            ]"
+            :options="categories"
+            clearable
           />
         </div>
       </Popover>
@@ -38,7 +34,62 @@ export default {
   data() {
     return {
       selectedCategory: '',
+      categories: [],
+      term: '',
+      typing: null,
     }
+  },
+  watch: {
+    term() {
+      clearTimeout(this.typing)
+
+      this.typing = setTimeout(() => {
+        this.updateRouteQuery()
+        this.searchCommunities({
+          term: this.term,
+          idCategory: this.selectedCategory,
+        })
+      }, 1000)
+    },
+    selectedCategory(value) {
+      this.updateRouteQuery()
+      this.searchCommunities({
+        term: this.term,
+        idCategory: value,
+      })
+    },
+  },
+  created() {
+    this.searchCommunities({
+      term: this.$route.query.term,
+      idCategory: this.$route.query.id_category,
+    })
+    this.getCategories()
+  },
+  methods: {
+    searchCommunities({ term, idCategory }) {
+      const params = {}
+      if (term) params.term = term
+      if (idCategory) params.id_category = idCategory
+
+      this.$axios.get('communities/search', { params }).then((res) => {
+        this.$emit('updateCommunities', res.data)
+      })
+    },
+    getCategories() {
+      this.$axios.get('categories').then((res) => {
+        this.categories = res.data.map((item) => ({
+          name: item.name,
+          value: item.id,
+        }))
+      })
+    },
+    updateRouteQuery() {
+      const query = {}
+      if (this.term) query.term = this.term
+      if (this.selectedCategory) query.id_category = this.selectedCategory
+      this.$router.replace({ query })
+    },
   },
 }
 </script>

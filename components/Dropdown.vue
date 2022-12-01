@@ -1,6 +1,10 @@
 <template>
   <div class="container">
-    <select :value="value" @input="updateValue($event.target.value)">
+    <select
+      :value="value"
+      :class="{ clearable }"
+      @input="updateValue($event.target.value)"
+    >
       <option value="" disabled selected>{{ placeholder }}</option>
       <option
         v-for="option in options"
@@ -10,6 +14,9 @@
         {{ option.name }}
       </option>
     </select>
+    <button v-if="clearable" @click.prevent="updateValue('')">
+      <img src="@/assets/img/close.png" alt="Limpar dropdown" />
+    </button>
   </div>
 </template>
 
@@ -29,6 +36,10 @@ export default {
     value: {
       type: String,
     },
+    clearable: {
+      type: Boolean,
+      default: false,
+    },
   },
   methods: {
     updateValue(value) {
@@ -44,7 +55,7 @@ export default {
   position: relative;
 
   select {
-    padding: 0.625rem 1.875rem;
+    padding: 0.625rem 3.5rem 0.625rem 1rem;
     font-size: 1rem;
     font-family: 'Poppins', sans-serif;
     border-radius: 7.5rem;
@@ -55,6 +66,10 @@ export default {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+
+    &.clearable {
+      padding: 0.625rem 5rem 0.625rem 1rem;
+    }
 
     &::-ms-expand {
       display: none;
@@ -73,6 +88,20 @@ export default {
     right: 1.625rem;
     position: absolute;
     pointer-events: none;
+  }
+
+  button {
+    position: absolute;
+    margin-left: -5rem;
+    margin-top: 0.9rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
+    img {
+      width: 1rem;
+      height: 1rem;
+    }
   }
 }
 </style>

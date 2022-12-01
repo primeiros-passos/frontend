@@ -1,10 +1,11 @@
 <template>
   <div class="container">
     <input
+      :value="value"
       :class="{ 'right-padding': actionIcon !== null }"
       :type="type"
       :placeholder="placeholder"
-      @keyup.enter="action"
+      @input="updateValue($event.target.value)"
     />
     <button v-if="actionIcon !== null" @click.prevent="action">
       <img :src="actionIcon" />
@@ -31,6 +32,15 @@ export default {
     action: {
       type: Function,
       default: () => {},
+    },
+    // eslint-disable-next-line vue/require-default-prop
+    value: {
+      type: String,
+    },
+  },
+  methods: {
+    updateValue(value) {
+      this.$emit('input', value)
     },
   },
 }
