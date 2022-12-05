@@ -1,6 +1,10 @@
 <template>
   <div class="container">
-    <button class="btn-toggle" :class="{ open }" @click.prevent="toggle">
+    <button
+      class="btn-toggle"
+      :class="{ open, simple, small }"
+      @click.prevent="toggle"
+    >
       <img :src="icon" />
     </button>
 
@@ -19,6 +23,14 @@ export default {
     icon: {
       type: String,
       required: true,
+    },
+    simple: {
+      type: Boolean,
+      default: false,
+    },
+    small: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -60,6 +72,30 @@ export default {
       width: 1.5rem;
       height: 1.5rem;
       margin-top: 0.2rem;
+    }
+
+    &.small {
+      width: 2rem;
+      height: 2rem;
+
+      img {
+        width: 1rem;
+        height: 1rem;
+        margin-top: 0.2rem;
+      }
+    }
+
+    &.simple {
+      background-color: transparent;
+      border: none;
+
+      &:hover {
+        background-color: none;
+      }
+
+      &.open {
+        background-color: transparent;
+      }
     }
   }
 

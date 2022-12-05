@@ -8,10 +8,13 @@
         <NuxtLink to="/">Início</NuxtLink>
         <NuxtLink to="/communities">Comunidades</NuxtLink>
       </div>
-      <!-- <div class="d-flex justify-center align-center">
+      <div v-if="!hasUser" class="d-flex justify-center align-center">
         <NuxtLink to="/login">Fazer Login</NuxtLink>
-        <Button secondary :on-click="() => $router.push('/signup')">Cadastrar</Button>
-      </div> -->
+        <Button secondary :on-click="() => $router.push('/signup')">
+          Cadastrar
+        </Button>
+      </div>
+      <NavbarLoggedMenu v-if="hasUser" />
     </div>
 
     <div v-else class="content d-flex flex-column justify-center align-end">
@@ -29,8 +32,17 @@
         <div v-if="menu" class="d-flex flex-column align-end">
           <NuxtLink to="/" class="mobile">Início</NuxtLink>
           <NuxtLink to="/communities" class="mobile">Comunidades</NuxtLink>
-          <!-- <NuxtLink to="/login" class="mobile">Fazer Login</NuxtLink>
-          <Button secondary :on-click="() => $router.push('/signup')">Cadastrar</Button> -->
+          <NuxtLink v-if="!hasUser" to="/login" class="mobile">
+            Fazer Login
+          </NuxtLink>
+          <Button
+            v-if="!hasUser"
+            secondary
+            :on-click="() => $router.push('/signup')"
+          >
+            Cadastrar
+          </Button>
+          <NavbarLoggedMenu v-if="hasUser" />
         </div>
       </Transition>
     </div>
@@ -38,6 +50,8 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   name: 'NavbarComponent',
   data() {
@@ -46,7 +60,14 @@ export default {
       menu: false,
     }
   },
+  computed: {
+    ...mapGetters(['user']),
+    hasUser() {
+      return JSON.stringify(this.user) !== '{}'
+    },
+  },
   mounted() {
+    this.getUserFromToken()
     this.windowWidth = window.innerWidth
     this.$nextTick(() => {
       window.addEventListener('resize', this.onResize)
@@ -56,6 +77,7 @@ export default {
     window.removeEventListener('resize', this.onResize)
   },
   methods: {
+    ...mapActions(['getUserFromToken']),
     onResize() {
       this.windowWidth = window.innerWidth
     },

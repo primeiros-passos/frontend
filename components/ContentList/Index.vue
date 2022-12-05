@@ -30,7 +30,7 @@
         v-for="content in contents"
         :key="content.id"
         :type="content.type"
-        :price="content.value"
+        :price="Number(content.value)"
         :description="content.description"
         :link="content.link"
       />
