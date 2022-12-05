@@ -20,7 +20,7 @@
       <img src="@/assets/img/payed.png" />
     </div>
     <div class="level">
-      <p>{{ level }}</p>
+      <p>{{ formatedLevel }}</p>
     </div>
     <button class="action">
       <img src="@/assets/img/cancel.png" />
@@ -66,6 +66,18 @@ export default {
         style: 'currency',
         currency: 'BRL',
       }).format(this.price)
+    },
+    formatedLevel() {
+      switch (this.level) {
+        case 'STARTER':
+          return 'Iniciante'
+        case 'MEDIUM':
+          return 'Intermediário'
+        case 'ADVANCED':
+          return 'Avançado'
+        default:
+          return this.level
+      }
     },
   },
 }
