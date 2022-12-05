@@ -6,7 +6,10 @@
 
     <div class="title">
       <p>Comunidade</p>
-      <h1>{{ community.name }}</h1>
+      <div class="d-flex">
+        <h1>{{ community.name }}</h1>
+        <span>página do moderador</span>
+      </div>
     </div>
 
     <div class="main">
@@ -41,47 +44,20 @@
           :contents="content.advanced"
         />
       </div>
-      <CommunityRelated
-        v-if="relatedCommunities.length > 0"
-        :related-communities="relatedCommunities"
-      />
+
+      <ModerateManageContent />
     </div>
 
     <CommunityAbout
-      :name="community.name"
-      :description="community.description"
+      :name="community.name || ''"
+      :description="community.description  || ''"
     />
-
-    <div class="w-100">
-      <div class="send-content">
-        <p class="header">Contribua com a comunidade</p>
-        <p>
-          Ajude a pagina trazendo novos conteúdos para a comunidade, clicando no
-          botão “Enviar conteúdo” abaixo. O conteúdo obrigatoriamente deve ser
-          sobre a comunidade em questão, podendo se enviar: vídeo aulas, Blogs,
-          tutoriais e afins. O conteúdo sera averiguado e posteriomente postado
-          na comunidade dentro de um dos cards de acordo com sua dificuldade de
-          aprendizado. Nós da plataforma e outros usuários agradecemos por sua
-          ajuda!
-        </p>
-        <Button secondary :on-click="() => (modalOpen = !modalOpen)">
-          Enviar conteúdo
-        </Button>
-        <Modal
-          title="Enviar conteúdo"
-          :open="modalOpen"
-          @closeModal="closeModal"
-        >
-          <CommunityContentModal @closeModal="closeModal" />
-        </Modal>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'CommunityPage',
+  name: 'ModeratePage',
   data() {
     return {
       community: {},
@@ -90,15 +66,12 @@ export default {
         medium: [],
         advanced: [],
       },
-      relatedCommunities: [],
-      modalOpen: false,
     }
   },
   created() {
     if (!this.$route.params.id) this.$router.push('/')
     this.getCommunityInformation()
     this.getCommunityContent()
-    this.getRelatedCommunities()
   },
   methods: {
     getCommunityInformation() {
@@ -113,16 +86,6 @@ export default {
           this.content = res.data
         })
     },
-    getRelatedCommunities() {
-      this.$axios
-        .get(`/communities/${this.$route.params.id}/related`)
-        .then((res) => {
-          this.relatedCommunities = res.data
-        })
-    },
-    closeModal() {
-      this.modalOpen = false
-    },
   },
 }
 </script>
@@ -133,6 +96,16 @@ export default {
 
   .title {
     margin: 2rem 0;
+
+    span {
+      background-color: $primary;
+      color: $white;
+      font-weight: 400;
+      font-size: 1rem;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      margin-left: 1rem;
+    }
   }
 
   .main {
@@ -143,7 +116,7 @@ export default {
     width: 100%;
 
     .lists {
-      width: 60%;
+      width: 48%;
     }
   }
 
@@ -171,7 +144,7 @@ export default {
   }
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 850px) {
   .content {
     .main {
       .lists {
