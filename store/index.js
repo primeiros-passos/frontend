@@ -6,6 +6,10 @@ export const getters = {
   user(state) {
     return state.user
   },
+
+  hasUser(state) {
+    return JSON.stringify(state.user) !== '{}'
+  },
 }
 
 export const mutations = {

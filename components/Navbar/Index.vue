@@ -17,7 +17,11 @@
       <NavbarLoggedMenu v-if="hasUser" />
     </div>
 
-    <div v-else class="content d-flex flex-column justify-center align-end">
+    <div
+      v-else
+      class="content d-flex flex-column justify-center align-end"
+      :class="{ 'menu-open': menu }"
+    >
       <Button icon :on-click="toggleMenu">
         <img
           :src="
@@ -61,10 +65,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['user']),
-    hasUser() {
-      return JSON.stringify(this.user) !== '{}'
-    },
+    ...mapGetters(['user', 'hasUser']),
   },
   mounted() {
     this.getUserFromToken()
@@ -127,6 +128,14 @@ nav {
   img {
     width: 2rem;
     height: 2rem;
+    transition-duration: 0.2s;
+    transition-property: rotate;
+  }
+
+  .menu-open {
+    img {
+      rotate: 180deg;
+    }
   }
 }
 
