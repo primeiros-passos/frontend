@@ -27,7 +27,6 @@ export const actions = {
         .get('users/token', { headers: { Authorization: token } })
         .then((res) => {
           commit('UPDATE_USER', res.data)
-          this.$router.push({ path: '/' })
         })
         .catch((error) => {
           if (

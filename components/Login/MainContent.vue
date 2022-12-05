@@ -57,6 +57,7 @@ export default {
         .then((res) => {
           localStorage.setItem('token', res.data)
           this.getUserFromToken()
+          this.$router.push({ path: '/' })
         })
         .catch((error) => {
           if (
