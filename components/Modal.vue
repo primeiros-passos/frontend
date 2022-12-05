@@ -31,8 +31,10 @@ export default {
   },
   watch: {
     open(value) {
-      if (value) document.body.style.overflowY = 'hidden'
-      else document.body.style.overflowY = 'auto'
+      if (value) {
+        document.body.style.overflowY = 'hidden'
+        window.scrollTo(0, 0)
+      } else document.body.style.overflowY = 'auto'
     },
   },
   methods: {
@@ -60,7 +62,7 @@ export default {
     background-color: $white;
     border-radius: 2rem;
     max-width: 1200px;
-    min-width: 50%;
+    min-width: 40%;
 
     .top {
       background-color: $primary;

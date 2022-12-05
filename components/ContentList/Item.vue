@@ -15,7 +15,7 @@
     <div v-else class="circle" :title="formatedPrice">
       <img src="@/assets/img/payed.png" />
     </div>
-    <a :href="link">
+    <a :href="link" target="_blank">
       <img src="@/assets/img/link.png" />
       <p>{{ description }}</p>
     </a>

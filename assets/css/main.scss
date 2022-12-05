@@ -42,6 +42,26 @@ h5 {
   width: 100%;
 }
 
+.w-50 {
+  width: 50%;
+}
+
+.w-30 {
+  width: 30%;
+}
+
+.w-70 {
+  width: 70%;
+}
+
+.w-40 {
+  width: 40%;
+}
+
+.w-60 {
+  width: 60%;
+}
+
 .content {
   max-width: 75rem;
   padding: 0.625rem 1.25rem;
@@ -58,6 +78,10 @@ h5 {
 
 .flex-wrap {
   flex-wrap: wrap;
+}
+
+.flex-wrap-reverse {
+  flex-wrap: wrap-reverse;
 }
 
 .align-center {

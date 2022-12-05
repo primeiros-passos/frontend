@@ -57,6 +57,30 @@
         <p>{{ community.description }}</p>
       </div>
     </div>
+    <div class="w-100">
+      <div class="send-content">
+        <p class="header">Contribua com a comunidade</p>
+        <p>
+          Ajude a pagina trazendo novos conteúdos para a comunidade, clicando no
+          botão “Enviar conteúdo” abaixo, ou no canto superior direito de cada
+          card. O conteúdo obrigatoriamente deve ser sobre a comunidade em
+          questão, podendo se enviar: vídeo aulas, Blogs, tutoriais e afins. O
+          conteúdo sera averiguado e posteriomente postado na comunidade dentro
+          de um dos cards de acordo com sua dificuldade de aprendizado. Nós da
+          plataforma e outros usuários agradecemos por sua ajda!
+        </p>
+        <Button secondary :on-click="() => (modalOpen = !modalOpen)">
+          Enviar conteúdo
+        </Button>
+        <Modal
+          title="Enviar conteúdo"
+          :open="modalOpen"
+          @closeModal="closeModal"
+        >
+          <CommunityContentModal @closeModal="closeModal" />
+        </Modal>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -72,6 +96,7 @@ export default {
         advanced: [],
       },
       relatedCommunities: [],
+      modalOpen: false,
     }
   },
   created() {
@@ -99,6 +124,9 @@ export default {
         .then((res) => {
           this.relatedCommunities = res.data
         })
+    },
+    closeModal() {
+      this.modalOpen = false
     },
   },
 }
@@ -164,12 +192,36 @@ export default {
     background-color: $white;
     border-radius: 1.25rem;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-bottom: 1.5rem;
 
     .header {
       font-size: 2rem;
       font-weight: 700;
       font-family: 'Sora', sans-serif;
       margin-bottom: 1rem;
+    }
+  }
+
+  .send-content {
+    padding: 2rem 1.5rem;
+    background-color: $primary;
+    border-radius: 1.25rem;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-bottom: 1.5rem;
+
+    .header {
+      font-size: 2rem;
+      font-weight: 700;
+      font-family: 'Sora', sans-serif;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: $white;
+    }
+
+    button {
+      margin-top: 1rem;
     }
   }
 }
