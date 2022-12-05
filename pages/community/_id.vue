@@ -39,24 +39,15 @@
           :contents="content.advanced"
         />
       </div>
-      <div v-if="relatedCommunities.length > 0" class="related">
-        <p>Comunidades relacionadas</p>
-        <a
-          v-for="relatedCommunity in relatedCommunities"
-          :key="relatedCommunity.id"
-          :href="$router.resolve(`/community/${relatedCommunity.id}`).href"
-          :style="{ backgroundColor: relatedCommunity.category.color }"
-        >
-          {{ relatedCommunity.name }}
-        </a>
-      </div>
+      <CommunityRelated
+        v-if="relatedCommunities.length > 0"
+        :related-communities="relatedCommunities"
+      />
     </div>
-    <div class="w-100">
-      <div class="about">
-        <p class="header">Sobre {{ community.name }}</p>
-        <p>{{ community.description }}</p>
-      </div>
-    </div>
+    <CommunityAbout
+      :name="community.name"
+      :description="community.description"
+    />
     <div class="w-100">
       <div class="send-content">
         <p class="header">Contribua com a comunidade</p>
@@ -150,56 +141,6 @@ export default {
     .lists {
       width: 60%;
     }
-
-    .related {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      flex-direction: column;
-      background-color: $tertiary-hyper-light;
-      border-radius: 0.625rem;
-      padding: 1.5rem 0.625rem;
-      margin: 2.813rem 0;
-      width: 35%;
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-
-      p {
-        color: $primary;
-        font-size: 1.5rem;
-        text-align: center;
-        margin-bottom: 2rem;
-      }
-
-      a {
-        font-weight: bold;
-        font-size: 0.875rem;
-        text-decoration: none;
-        text-align: center;
-        padding: 0.625rem 0;
-        width: 100%;
-        border-radius: 0.625rem;
-        margin-bottom: 1rem;
-
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
-    }
-  }
-
-  .about {
-    padding: 2rem 1.5rem;
-    background-color: $white;
-    border-radius: 1.25rem;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    margin-bottom: 1.5rem;
-
-    .header {
-      font-size: 2rem;
-      font-weight: 700;
-      font-family: 'Sora', sans-serif;
-      margin-bottom: 1rem;
-    }
   }
 
   .send-content {
@@ -231,11 +172,6 @@ export default {
     .main {
       .lists {
         width: 100%;
-      }
-
-      .related {
-        width: 100%;
-        margin-top: 0;
       }
     }
   }
