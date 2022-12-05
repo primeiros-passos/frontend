@@ -24,11 +24,23 @@
       </Popover>
     </div>
 
-    <!-- <Button secondary :on-click="() => {}">Solicitar comunidade</Button> -->
+    <Button v-if="hasUser" secondary :on-click="() => (modalOpen = true)">
+      Solicitar comunidade
+    </Button>
+    <Modal
+      v-if="hasUser"
+      title="Solicitar Comunidade"
+      :open="modalOpen"
+      @closeModal="closeModal"
+    >
+      <CommunitiesSuggestionModal :categories="categories" @closeModal="closeModal" />
+    </Modal>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'CommunitiesActionRow',
   data() {
@@ -37,7 +49,11 @@ export default {
       categories: [],
       term: this.$route.query.term || '',
       typing: null,
+      modalOpen: false,
     }
+  },
+  computed: {
+    ...mapGetters(['hasUser']),
   },
   watch: {
     term() {
@@ -89,6 +105,9 @@ export default {
       if (this.term) query.term = this.term
       if (this.selectedCategory) query.id_category = this.selectedCategory
       this.$router.replace({ query })
+    },
+    closeModal() {
+      this.modalOpen = false
     },
   },
 }

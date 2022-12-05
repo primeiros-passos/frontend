@@ -1,6 +1,6 @@
 <template>
   <label class="switch">
-    <input type="checkbox" @input="updateValue($event.target.value)" />
+    <input v-model="model" type="checkbox" />
     <span class="slider"></span>
   </label>
 </template>
@@ -11,12 +11,17 @@ export default {
   props: {
     // eslint-disable-next-line vue/require-default-prop
     value: {
-      type: String,
+      type: Boolean,
     },
   },
-  methods: {
-    updateValue(value) {
-      this.$emit('input', value)
+  computed: {
+    model: {
+      get() {
+        return this.value
+      },
+      set(value) {
+        this.$emit('input', value)
+      },
     },
   },
 }
