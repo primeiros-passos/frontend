@@ -62,12 +62,12 @@
         <p class="header">Contribua com a comunidade</p>
         <p>
           Ajude a pagina trazendo novos conteúdos para a comunidade, clicando no
-          botão “Enviar conteúdo” abaixo, ou no canto superior direito de cada
-          card. O conteúdo obrigatoriamente deve ser sobre a comunidade em
-          questão, podendo se enviar: vídeo aulas, Blogs, tutoriais e afins. O
-          conteúdo sera averiguado e posteriomente postado na comunidade dentro
-          de um dos cards de acordo com sua dificuldade de aprendizado. Nós da
-          plataforma e outros usuários agradecemos por sua ajda!
+          botão “Enviar conteúdo” abaixo. O conteúdo obrigatoriamente deve ser
+          sobre a comunidade em questão, podendo se enviar: vídeo aulas, Blogs,
+          tutoriais e afins. O conteúdo sera averiguado e posteriomente postado
+          na comunidade dentro de um dos cards de acordo com sua dificuldade de
+          aprendizado. Nós da plataforma e outros usuários agradecemos por sua
+          ajuda!
         </p>
         <Button secondary :on-click="() => (modalOpen = !modalOpen)">
           Enviar conteúdo
