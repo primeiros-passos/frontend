@@ -4,12 +4,25 @@
       <img src="@/assets/img/left-arrow.png" alt="Voltar" />
     </Button>
 
-    <div class="title">
-      <p>Comunidade</p>
-      <div class="d-flex">
-        <h1>{{ community.name }}</h1>
-        <span>página do moderador</span>
+    <div class="d-flex flex-wrap align-center justify-between">
+      <div class="title">
+        <p>Comunidade</p>
+        <div class="d-flex flex-wrap">
+          <h1>{{ community.name }}</h1>
+          <span>página do moderador</span>
+        </div>
       </div>
+
+      <Button secondary :on-click="() => (modalOpen = true)">
+        Convidar moderador
+      </Button>
+      <Modal
+        title="Convidar moderador"
+        :open="modalOpen"
+        @closeModal="closeModal"
+      >
+        <ModerateInviteModal @closeModal="closeModal" />
+      </Modal>
     </div>
 
     <div class="main">
@@ -68,6 +81,7 @@ export default {
         medium: [],
         advanced: [],
       },
+      modalOpen: false,
     }
   },
   computed: {
@@ -108,6 +122,9 @@ export default {
             })
         }
       }, 200)
+    },
+    closeModal() {
+      this.modalOpen = false
     },
   },
 }
