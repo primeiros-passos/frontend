@@ -18,7 +18,7 @@
         :content-count="community._count.content"
         :route="$router.resolve(`community/${community.id}`).href"
       />
-      <div v-if="communities.length % 2 === 0" class="placeholder"></div>
+      <div v-if="communities.length % 3 !== 0" class="placeholder"></div>
     </div>
     <div v-else class="no-content">
       <h1>Nenhuma comunidade a mostar...</h1>

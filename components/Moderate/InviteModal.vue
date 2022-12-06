@@ -24,6 +24,7 @@ export default {
   },
   methods: {
     sendInvite() {
+      this.error = ''
       if (!this.email) {
         this.error = 'Informe um endereço de e-mail.'
       }

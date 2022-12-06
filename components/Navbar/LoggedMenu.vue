@@ -2,7 +2,7 @@
   <div class="logged-menu">
     <p>{{ user.name }}</p>
     <Popover :icon="require('@/assets/img/white-down-arrow.png')" simple small>
-      <Button :on-click="() => {}" white>
+      <Button :on-click="() => $router.push('/profile')" white>
         <div class="btn-content">
           <img :src="require('@/assets/img/user.png')" />
           Perfil

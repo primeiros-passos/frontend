@@ -44,5 +44,6 @@ export const actions = {
   logout({ commit }) {
     localStorage.removeItem('token')
     commit('UPDATE_USER', {})
+    this.$router.push({ path: '/' })
   },
 }

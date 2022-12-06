@@ -5,6 +5,7 @@
       :class="{ 'right-padding': actionIcon !== null }"
       :type="type"
       :placeholder="placeholder"
+      :disabled="disabled"
       @keyup.enter="action"
       @input="updateValue($event.target.value)"
     />
@@ -33,6 +34,10 @@ export default {
     action: {
       type: Function,
       default: () => {},
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
     // eslint-disable-next-line vue/require-default-prop
     value: {
