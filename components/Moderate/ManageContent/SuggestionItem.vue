@@ -4,28 +4,30 @@
       <img src="@/assets/img/link.png" />
       <p>{{ description }}</p>
     </a>
-    <div v-if="type === 'VIDEO'" class="circle" title="Vídeo">
-      <img src="@/assets/img/video.png" />
-    </div>
-    <div v-if="type === 'COURSE'" class="circle" title="Curso">
-      <img src="@/assets/img/course.png" />
-    </div>
-    <div v-if="type === 'ARCHIVE'" class="circle" title="Arquivo">
-      <img src="@/assets/img/archive.png" />
-    </div>
-    <div v-if="price == 0" class="circle" title="Gratuito">
-      <img src="@/assets/img/free.png" />
-    </div>
-    <div v-else class="circle" :title="formatedPrice">
-      <img src="@/assets/img/payed.png" />
+    <div class="d-flex align-center">
+      <div v-if="type === 'VIDEO'" class="circle" title="Vídeo">
+        <img src="@/assets/img/video.png" />
+      </div>
+      <div v-if="type === 'COURSE'" class="circle" title="Curso">
+        <img src="@/assets/img/course.png" />
+      </div>
+      <div v-if="type === 'ARCHIVE'" class="circle" title="Arquivo">
+        <img src="@/assets/img/archive.png" />
+      </div>
+      <div v-if="price == 0" class="circle" title="Gratuito">
+        <img src="@/assets/img/free.png" />
+      </div>
+      <div v-else class="circle" :title="formatedPrice">
+        <img src="@/assets/img/payed.png" />
+      </div>
     </div>
     <div class="level">
       <p>{{ formatedLevel }}</p>
     </div>
-    <button class="action">
+    <button v-if="!noActions" class="action" @click.prevent="denySuggestion">
       <img src="@/assets/img/cancel.png" />
     </button>
-    <button class="action">
+    <button v-if="!noActions" class="action" @click.prevent="approveSuggestion">
       <img src="@/assets/img/check.png" />
     </button>
   </div>
@@ -59,6 +61,10 @@ export default {
       type: String,
       required: true,
     },
+    noActions: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     formatedPrice() {
@@ -78,6 +84,34 @@ export default {
         default:
           return this.level
       }
+    },
+  },
+  methods: {
+    approveSuggestion() {
+      const token = localStorage.getItem('token')
+      this.$axios
+        .post(
+          `/suggestions/${this.id}/approve`,
+          {},
+          { headers: { Authorization: token } }
+        )
+        .then((res) => {
+          const suggestion = res.data
+          this.$emit('removeItem', suggestion.id)
+        })
+    },
+    denySuggestion() {
+      const token = localStorage.getItem('token')
+      this.$axios
+        .post(
+          `/suggestions/${this.id}/deny`,
+          {},
+          { headers: { Authorization: token } }
+        )
+        .then((res) => {
+          const suggestion = res.data
+          this.$emit('removeItem', suggestion.id)
+        })
     },
   },
 }
@@ -147,11 +181,13 @@ export default {
   background-color: $tertiary-lighter;
   padding: 0.125rem 0.625rem;
   border-radius: 1.25rem;
+  min-width: 117.55px;
 
   p {
     font-size: 0.875rem;
     font-weight: 600;
     color: $white;
+    text-align: center;
   }
 }
 

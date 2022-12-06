@@ -9,7 +9,7 @@
       :type="suggestion.content_type"
       :price="Number(suggestion.content_value)"
       :level="suggestion.content_level"
-      @removeItem="removeItem"
+      no-actions
     />
     <p v-if="suggestions.length < 1">Nenhuma sugestão cadastrada...</p>
   </div>
@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: 'ModerateManageContentSuggestions',
+  name: 'ModerateManageContentDeniedSuggestions',
   data() {
     return {
       suggestions: [],
@@ -30,14 +30,11 @@ export default {
     getSuggestionsByCommunity() {
       this.$axios
         .get(`/communities/${this.$route.params.id}/suggestions`, {
-          params: { status: 'PENDING' },
+          params: { status: 'DENIED' },
         })
         .then((res) => {
           this.suggestions = res.data
         })
-    },
-    removeItem(id) {
-      this.suggestions = this.suggestions.filter((item) => item.id !== id)
     },
   },
 }

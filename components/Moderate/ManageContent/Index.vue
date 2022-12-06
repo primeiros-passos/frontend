@@ -25,6 +25,7 @@
     </div>
     <div class="tabs">
       <ModerateManageContentSuggestions v-if="tabActive === 'suggestion'" />
+      <ModerateManageContentDeniedSuggestions v-if="tabActive === 'rejected'" />
     </div>
   </div>
 </template>
