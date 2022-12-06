@@ -35,6 +35,7 @@
         "
           level="starter"
           :contents="content.starter"
+          can-delete
         />
         <ContentList
           title="Intermediário"
@@ -45,6 +46,7 @@
         "
           level="medium"
           :contents="content.medium"
+          can-delete
         />
         <ContentList
           title="Avançado"
@@ -55,6 +57,7 @@
         "
           level="advanced"
           :contents="content.advanced"
+          can-delete
         />
       </div>
 
@@ -119,6 +122,9 @@ export default {
             )
             .then((res) => {
               if (res.data === false) this.$router.push({ path: '/' })
+            })
+            .catch(() => {
+              this.$router.push({ path: '/' })
             })
         }
       }, 200)

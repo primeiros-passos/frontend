@@ -28,11 +28,14 @@
     <div v-if="open" class="list">
       <ContentListItem
         v-for="content in contents"
+        :id="content.id"
         :key="content.id"
         :type="content.type"
         :price="Number(content.value)"
         :description="content.description"
         :link="content.link"
+        :can-delete="canDelete"
+        @removeItem="removeItem"
       />
     </div>
   </div>
@@ -58,6 +61,10 @@ export default {
       type: Array,
       required: true,
     },
+    canDelete: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -67,6 +74,10 @@ export default {
   methods: {
     toggle() {
       this.open = !this.open
+    },
+    removeItem(id) {
+      // eslint-disable-next-line vue/no-mutating-props
+      this.contents = this.contents.filter((item) => item.id !== id)
     },
   },
 }

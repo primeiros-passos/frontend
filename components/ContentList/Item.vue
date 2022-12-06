@@ -19,6 +19,9 @@
       <img src="@/assets/img/link.png" />
       <p>{{ description }}</p>
     </a>
+    <button v-if="canDelete" class="action" @click.prevent="deleteContent">
+      <img src="@/assets/img/cancel.png" />
+    </button>
   </div>
 </template>
 
@@ -26,6 +29,10 @@
 export default {
   name: 'ContentListItem',
   props: {
+    id: {
+      type: String,
+      required: true,
+    },
     type: {
       type: String,
       required: true,
@@ -42,6 +49,10 @@ export default {
       type: String,
       required: true,
     },
+    canDelete: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     formatedPrice() {
@@ -49,6 +60,18 @@ export default {
         style: 'currency',
         currency: 'BRL',
       }).format(this.price)
+    },
+  },
+  methods: {
+    deleteContent() {
+      const token = localStorage.getItem('token')
+      this.$axios
+        .delete(`/contents/${this.id}`, {
+          headers: { Authorization: token },
+        })
+        .then(() => {
+          this.$emit('removeItem', this.id)
+        })
     },
   },
 }
@@ -112,6 +135,14 @@ export default {
       overflow: hidden;
       text-overflow: ellipsis;
     }
+  }
+
+  .action {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin-left: 0.5rem;
   }
 }
 
