@@ -26,6 +26,7 @@
     <div class="tabs">
       <ModerateManageContentSuggestions v-if="tabActive === 'suggestion'" />
       <ModerateManageContentDeniedSuggestions v-if="tabActive === 'rejected'" />
+      <ModerateManageContentModerators v-if="tabActive === 'moderator'" />
     </div>
   </div>
 </template>

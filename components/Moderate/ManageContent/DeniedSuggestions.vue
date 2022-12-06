@@ -11,7 +11,7 @@
       :level="suggestion.content_level"
       no-actions
     />
-    <p v-if="suggestions.length < 1">Nenhuma sugestão cadastrada...</p>
+    <p v-if="suggestions.length < 1">Nenhuma sugestão rejeitada...</p>
   </div>
 </template>
 
