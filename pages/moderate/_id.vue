@@ -50,12 +50,14 @@
 
     <CommunityAbout
       :name="community.name || ''"
-      :description="community.description  || ''"
+      :description="community.description || ''"
     />
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'ModeratePage',
   data() {
@@ -68,8 +70,12 @@ export default {
       },
     }
   },
-  created() {
+  computed: {
+    ...mapGetters(['user']),
+  },
+  mounted() {
     if (!this.$route.params.id) this.$router.push('/')
+    this.checkIfIsModerator()
     this.getCommunityInformation()
     this.getCommunityContent()
   },
@@ -85,6 +91,23 @@ export default {
         .then((res) => {
           this.content = res.data
         })
+    },
+    checkIfIsModerator() {
+      setTimeout(() => {
+        if (process.client) {
+          const token = localStorage.getItem('token')
+          this.$axios
+            .get(
+              `/users/ismoderator/${this.user.id}/${this.$route.params.id}`,
+              {
+                headers: { Authorization: token },
+              }
+            )
+            .then((res) => {
+              if (res.data === false) this.$router.push({ path: '/' })
+            })
+        }
+      }, 200)
     },
   },
 }
