@@ -52,7 +52,7 @@
       :description="community.description || ''"
     />
 
-    <div class="w-100">
+    <div v-if="JSON.stringify(user) !== '{}'" class="w-100">
       <div class="send-content">
         <p class="header">Contribua com a comunidade</p>
         <p>
@@ -80,6 +80,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'CommunityPage',
   data() {
@@ -93,6 +95,9 @@ export default {
       relatedCommunities: [],
       modalOpen: false,
     }
+  },
+  computed: {
+    ...mapGetters(['user']),
   },
   created() {
     if (!this.$route.params.id) this.$router.push('/')
