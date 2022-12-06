@@ -48,8 +48,8 @@
     </div>
 
     <CommunityAbout
-      :name="community.name"
-      :description="community.description"
+      :name="community.name || ''"
+      :description="community.description || ''"
     />
 
     <div class="w-100">
