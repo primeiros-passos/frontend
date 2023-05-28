@@ -16,7 +16,7 @@
         <div class="categories-filter">
           <Dropdown
             v-model="selectedCategory"
-            placeholder="Selecione uma categoria"
+            placeholder="Selecione uma categoria..."
             :options="categories"
             clearable
           />
