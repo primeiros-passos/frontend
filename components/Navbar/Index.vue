@@ -24,6 +24,7 @@
     >
       <Button icon :on-click="toggleMenu">
         <img
+          class="menu-toggle"
           :src="
             !menu
               ? require('@/assets/img/menu.png')
@@ -133,7 +134,7 @@ nav {
   }
 
   .menu-open {
-    img {
+    img.menu-toggle {
       rotate: 180deg;
     }
   }
