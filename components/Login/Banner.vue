@@ -4,7 +4,7 @@
       <p>Mais de</p>
       <p>
         &nbsp;
-        {{ userCount < 10 ? `0${userCount}` : userCount }}
+        {{ isLoading ? '...' : (userCount < 10 ? `0${userCount}` : userCount) }}
         &nbsp;
       </p>
       <p>usuários</p>
@@ -18,17 +18,24 @@ export default {
   name: 'LoginBanner',
   data() {
     return {
+      isLoading: false,
       userCount: 0,
     }
   },
   created() {
+    this.isLoading = true
     this.getUserCount()
   },
   methods: {
     getUserCount() {
-      this.$axios.get('users/count').then((res) => {
-        this.userCount = res.data
-      })
+      this.$axios
+        .get('users/count')
+        .then((res) => {
+          this.userCount = res.data
+        })
+        .finally(() => {
+          this.isLoading = false
+        })
     },
   },
 }
