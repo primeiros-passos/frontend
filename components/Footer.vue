@@ -1,6 +1,6 @@
 <template>
   <footer class="w-100 d-flex align-center justify-center">
-    <p>© Primeiros Passos - 2022. Todos direitos reservados</p>
+    <p>© Primeiros Passos - 2023. Todos direitos reservados</p>
   </footer>
 </template>
 
