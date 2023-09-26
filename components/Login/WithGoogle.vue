@@ -19,6 +19,7 @@ export default {
       })
     },
     login(currentUser, dontRetry = false) {
+      console.log(currentUser)
       const email = currentUser.Mx.Fy
       this.$axios
         .post('auth/login', {
