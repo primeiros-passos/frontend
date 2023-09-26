@@ -35,7 +35,7 @@ export default {
           else console.log('Houve um erro durante o login, tente mais tarde')
         })
     },
-    createAccount(currentUser) {
+    createAccount() {
       const currentUser = this.$gapi.getUserData()
       this.$axios
         .post('users', {
