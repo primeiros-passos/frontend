@@ -15,17 +15,15 @@ export default {
     getInfo() {
       this.$gapi.login().then(({ currentUser }) => {
         if (!currentUser) return
-        this.login(currentUser)
+        this.login()
       })
     },
-    login(currentUser, dontRetry = false) {
-      console.log(currentUser)
-      console.log(this.$gapi.getUserData())
-      const email = currentUser.Mx.Fy
+    login(dontRetry = false) {
+      const currentUser = this.$gapi.getUserData()
       this.$axios
         .post('auth/login', {
-          email,
-          password: `${process.env.G_SECRET}${email}`,
+          email: currentUser.email,
+          password: `${process.env.G_SECRET}${currentUser.email}`,
         })
         .then((res) => {
           localStorage.setItem('token', res.data)
@@ -33,21 +31,21 @@ export default {
           this.$router.push({ path: '/' })
         })
         .catch(() => {
-          if (!dontRetry) this.createAccount(currentUser)
+          if (!dontRetry) this.createAccount()
           else console.log('Houve um erro durante o login, tente mais tarde')
         })
     },
     createAccount(currentUser) {
-      const [username, email] = [currentUser.Mx.Zf, currentUser.Mx.Fy]
+      const currentUser = this.$gapi.getUserData()
       this.$axios
         .post('users', {
-          name: username,
-          username: `${username.replaceAll(' ', '').toLowerCase()}+${email}`,
+          name: currentUser.fullName,
+          username: `${currentUser.fullName.replaceAll(' ', '').toLowerCase()}+${currentUser.email}`,
           email,
-          password: `${process.env.G_SECRET}${email}`,
+          password: `${process.env.G_SECRET}${currentUser.email}`,
         })
         .then(() => {
-          this.login(currentUser, true)
+          this.login(true)
         })
     },
   },
