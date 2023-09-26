@@ -14,6 +14,7 @@ export default {
     ...mapActions(['getUserFromToken']),
     getInfo() {
       this.$gapi.login().then(({ currentUser }) => {
+        if (!currentUser) return
         this.login(currentUser)
       })
     },
