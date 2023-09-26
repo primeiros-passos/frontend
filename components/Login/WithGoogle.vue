@@ -20,6 +20,7 @@ export default {
     },
     login(currentUser, dontRetry = false) {
       console.log(currentUser)
+      console.log(this.$gapi.getUserData())
       const email = currentUser.Mx.Fy
       this.$axios
         .post('auth/login', {
