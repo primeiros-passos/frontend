@@ -23,6 +23,8 @@
         <Button secondary :on-click="authenticate">Login</Button>
       </div>
     </div>
+
+    <LoginWithGoogle />
   </div>
 </template>
 

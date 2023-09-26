@@ -33,7 +33,7 @@ export default {
   css: ['@/assets/css/main.scss', '@/assets/css/colors.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['./plugins/vue-gapi.client.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -63,4 +63,10 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  env: {
+    G_API_KEY: process.env.G_API_KEY,
+    G_CLIENT_ID: process.env.G_CLIENT_ID,
+    G_SECRET: process.env.G_SECRET,
+  }
 }
