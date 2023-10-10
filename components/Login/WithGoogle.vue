@@ -41,7 +41,7 @@ export default {
         .post('users', {
           name: currentUser.fullName,
           username: `${currentUser.fullName.replaceAll(' ', '').toLowerCase()}+${currentUser.email}`,
-          email,
+          email: currentUser.email,
           password: `${process.env.G_SECRET}${currentUser.email}`,
         })
         .then(() => {
